@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.0'
 }
 
 group = 'topen.discordbot'
@@ -10,10 +11,36 @@ repositories {
 }
 
 dependencies {
+    implementation 'net.sf.trove4j:trove4j:3.0.3'
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation group: 'net.dv8tion', name: 'JDA', version: '5.0.2'
+    implementation("io.github.cdimascio:java-dotenv:5.2.2")
+    implementation group: 'org.json', name: 'json', version: '20240303'
+    implementation("ch.qos.logback:logback-classic:1.5.6")
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.0'
+    implementation 'org.springframework:spring-core:6.1.3'
+    testImplementation 'junit:junit:4.13.2'
+
 }
 
 test {
     useJUnitPlatform()
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'topen.discordbot.Main', // 메인 클래스 경로
+                'Implementation-Version': project.version
+        )
+    }
+
+
+    from(configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }) {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE // 중복 파일 제외
+    }
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
 }

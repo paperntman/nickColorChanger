@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="nickColorChanger">
+    <output-path>$PROJECT_DIR$/out/artifacts/nickColorChanger</output-path>
+    <root id="archive" name="nickColorChanger.jar">
+      <element id="module-output" name="nickColorChanger.main" />
+      <element id="file-copy" path="$PROJECT_DIR$/.env" />
+    </root>
+  </artifact>
+</component>
